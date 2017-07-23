@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import withSizes from 'react-sizes';
+
+import { mapSizesToProps } from '../utils/responsive'
 import { BaseDiv } from './Div'
 
 const Background = {
@@ -20,42 +23,45 @@ function getBackground(background) {
 }
 
 const FlexRow = styled.div`
-  height:2em;
   width:100%;
   display: flex;
-  flex-flow: row wrap;
+  ${props => props.isMobile ? 'height:8em;' : 'height:2em;'};
+  ${props => props.isMobile ? '  flex-flow: column nowrap;' : 'flex-flow: row nowrap;'};
   ${props => getBackground(props.background)}
 `;
+const ResRow = withSizes(mapSizesToProps)(FlexRow)
 
 const ColSmall = BaseDiv.extend`
-    flex: 2 0 0;
-    justify-content: center;
+${props => props.isMobile ? '' : 'flex: 2 0 0;'};
+justify-content: center;
 `;
+const ResColSmall = withSizes(mapSizesToProps)(ColSmall)
 
 const ColBig = BaseDiv.extend`
-    flex: 5 0 0;
+${props => props.isMobile ? '' : 'flex: 5 0 0;'};
 `;
+const ResColBig = withSizes(mapSizesToProps)(ColBig)
 
 function Row(props) {
 
     return (
-        <FlexRow background={props.background}>
-            <ColSmall>
+        <ResRow background={props.background} isMobile={props.isMobile}>
+            <ResColSmall>
                 {props.col1}
-            </ColSmall>
+            </ResColSmall>
 
-            <ColBig>
+            <ResColBig>
                 {props.col2}
-            </ColBig>
+            </ResColBig>
 
-            <ColBig>
+            <ResColBig>
                 {props.col3}
-            </ColBig>
+            </ResColBig>
 
-            <ColBig>
+            <ResColBig>
                 {props.col4}
-            </ColBig>
-        </FlexRow>
+            </ResColBig>
+        </ResRow>
     )
 }
 

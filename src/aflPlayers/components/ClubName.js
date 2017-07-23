@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import withSizes from 'react-sizes';
 
+import { mapSizesToProps } from '../utils/responsive'
 import getClassName from '../utils/clubMappings'
-import {BaseDivWithBlueFont} from './Div'
+import { BaseDivWithBlueFont } from './Div'
 
 const Div = BaseDivWithBlueFont.extend`
     &::before {
@@ -20,9 +22,9 @@ const Div = BaseDivWithBlueFont.extend`
 
 function ClubName(props) {
     return (
-            <Div name={props.name}>
-                {props.name}
-            </Div>
+        <Div name={props.name} isMobile={props.isMobile}>
+            {props.name}
+        </Div>
     )
 }
 
@@ -30,4 +32,4 @@ ClubName.propTypes = {
     name: PropTypes.string.isRequired
 };
 
-export default ClubName;
+export default withSizes(mapSizesToProps)(ClubName);

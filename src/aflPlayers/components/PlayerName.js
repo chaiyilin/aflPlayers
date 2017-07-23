@@ -1,29 +1,21 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import withSizes from 'react-sizes';
 
-import { BaseDivWithBlueFont } from './Div'
+import { mapSizesToProps } from '../utils/responsive'
+import { BaseDiv, BaseDivWithBlueFont, ItemLeft, ItemRight } from './Div'
 
 function PlayerName(props) {
     return (
-        <BaseDivWithBlueFont>
+        <BaseDivWithBlueFont isMobile={props.isMobile}>
             {props.name}
         </BaseDivWithBlueFont>
     )
-}
-
-function PlayerNameContainer(props) {
-    return (
-        <ContainerQuery query={query}>
-            {(params) => (
-                <PlayerName {...props} className={classnames(params)} />
-            )}
-        </ContainerQuery>
-    );
 }
 
 PlayerName.propTypes = {
     name: PropTypes.string.isRequired
 };
 
-export default PlayerName;
+export default withSizes(mapSizesToProps)(PlayerName);
