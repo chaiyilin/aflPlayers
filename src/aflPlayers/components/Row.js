@@ -11,7 +11,7 @@ const Background = {
     GRADIENT: 'gradient',
 };
 
-function getBackground(background) {
+export function getBackground(background) {
     switch (background) {
         case Background.COLOR:
             return 'background-color:#E6E6E6'
@@ -65,11 +65,15 @@ function Row(props) {
     )
 }
 
+const types = PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.element
+])
 Row.propTypes = {
-    col1: PropTypes.element,
-    col2: PropTypes.element,
-    col3: PropTypes.element,
-    col4: PropTypes.element,
+    col1: types,
+    col2: types,
+    col3: types,
+    col4: types,
     background: PropTypes.string
 };
 export default Row;

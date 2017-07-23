@@ -24,7 +24,7 @@ const Div = styled.div`
     justify-content: center;
     `;
 
-function App(props) {
+export function App(props) {
     return (
         <Div isMobile={props.isMobile}>
             {!props.isMobile && <Header />}
@@ -38,7 +38,7 @@ function App(props) {
     )
 }
 
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
     const players = state.playerRatings;
     return {
         players
